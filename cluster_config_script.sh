@@ -80,7 +80,6 @@ if [ "$YESNO" = 'Y' ]; then
 		</Directory>
 	EOM
 
-
 	echo "Would you like to:"
 	echo "A) Default Config (block all but ganglia and roll-documentation)"
 	echo "B) Block All"
@@ -123,13 +122,9 @@ cat > /var/www/html/index.html <<- EOM
 <html>
 EOM
 
-<file name="/var/www/html/index.html" owner="root.apache">
-</file>
-
 if [ "$YESNO" != 'Y' ]; then 
 	rm -f /var/www/html/index.html
 
 service httpd restart
 
-</post>
 
