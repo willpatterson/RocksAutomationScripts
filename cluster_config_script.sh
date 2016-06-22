@@ -1,9 +1,7 @@
-
-<file name="/root/arc-standard-setup">
 #ldap setup -->
 echo "Would you like to setup PAM/LDAP? [Y/N]"
 read YESNO
-while [ "$YESNO" != 'Y' ] &amp;&amp; [ "$YESNO" != 'N' ]; do
+while [ "$YESNO" != 'Y' ] && [ "$YESNO" != 'N' ]; do
 	echo "Please enter either 'Y' or 'N'"
 	read YESNO
 done
@@ -18,7 +16,7 @@ fi
 #Stow setup -->
 echo "Would you like to setup stow directories in /export/apps? [Y/N]"
 read YESNO
-while [ "$YESNO" != 'Y' ] &amp;&amp; [ "$YESNO" != 'N' ]; do
+while [ "$YESNO" != 'Y' ] && [ "$YESNO" != 'N' ]; do
 	echo "Please enter either 'Y' or 'N'"
 	read YESNO
 done
@@ -33,7 +31,7 @@ fi
 #Passwordless Sudo
 echo "Would you like to setup passwordless sudo? [Y/N]"
 read YESNO
-while [ "$YESNO" != 'Y' ] &amp;&amp; [ "$YESNO" != 'N' ]; do
+while [ "$YESNO" != 'Y' ] && [ "$YESNO" != 'N' ]; do
 	echo "Please enter either 'Y' or 'N'"
 	read YESNO
 done
@@ -45,7 +43,7 @@ fi
 #Firewall Config
 echo "Would you like to setup A40-WWW-PUBLIC-NEW? [Y/N]"
 read YESNO
-while [ "$YESNO" != 'Y' ] &amp;&amp; [ "$YESNO" != 'N' ]; do
+while [ "$YESNO" != 'Y' ] && [ "$YESNO" != 'N' ]; do
 	echo "Please enter either 'Y' or 'N'"
 	read YESNO
 done
@@ -61,13 +59,13 @@ fi
 
 if [[ x`rocks list roll` == *'web-server'* ]] 
 then
-	echo "The web-server roll is installed. Would you like to access to web directories in /var/www/html? [Y/N]"
+	echo "The web-server roll is installed. Would you like to block access to web directories in /var/www/html? [Y/N]"
 else 
 	echo "The web-server roll is not installed. Would you still like to block web access anyway? [Y/N]"
 fi
 
 read YESNO
-while [ "$YESNO" != 'Y' ] &amp;&amp; [ "$YESNO" != 'N' ]; do
+while [ "$YESNO" != 'Y' ] && [ "$YESNO" != 'N' ]; do
 	echo "Please enter either 'Y' or 'N'"
 	read YESNO
 done
@@ -87,24 +85,21 @@ if [ "$YESNO" = 'Y' ]; then
 	echo "A) Default Config (block all but ganglia and roll-documentation)"
 	echo "B) Block All"
 	echo "C) Select manually"
-	#TODO: Left off here. Was going to add the input parseing here
-	
+
+        read YESNO
+        while [ "$YESNO" != 'A' ] && [ "$YESNO" != 'B' ] && [ "$YESNO" != 'C' ]; do
+            echo "Please enter either 'A', 'B' or 'C'"
+            read YESNO
+
 	for webdir in $WEB_DIRS; do 
 		
 		
 	if grep -q "$BLOCK_ACCESS" /etc/httpd/conf/httpd.conf; then
 		
+	#TODO: Left off here. 
 
 
-
-if [ "$YESNO" = 'Y' ]; then 
-	cat /root/httpd.conf_head_split /root/httpd.conf_tail_split > /etc/httpd/conf/httpd.conf
-	rm -f /root/httpd.conf_head_split /root/httpd.conf_tail_split
-else
-	rm -f /root/httpd/conf_head_split /root/httpd.conf_tail_split /root/httpd.conf.bak
-fi
-
-<!-- Ganglia web setup -->
+#Ganglia web setup -->
 if [[ x`rocks list roll` == *'ganglia'* ]] 
 then
 	echo "The ganglia roll is installed. Would you like set ganglia as this cluster's home page? [Y/N]"
@@ -113,7 +108,7 @@ else
 fi
 
 read YESNO
-while [ "$YESNO" != 'Y' ] &amp;&amp; [ "$YESNO" != 'N' ]; do
+while [ "$YESNO" != 'Y' ] && [ "$YESNO" != 'N' ]; do
 	echo "Please enter either 'Y' or 'N'"
 	read YESNO
 done
