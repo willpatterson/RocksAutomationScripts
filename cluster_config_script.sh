@@ -57,6 +57,7 @@ fi
 
 #Config web access -->
 
+<<COMMENT
 if [[ x`rocks list roll` == *'web-server'* ]] 
 then
 	echo "The web-server roll is installed. Would you like to block access to web directories in /var/www/html? [Y/N]"
@@ -96,6 +97,7 @@ if [ "$YESNO" = 'Y' ]; then
 	if grep -q "$BLOCK_ACCESS" /etc/httpd/conf/httpd.conf; then
 		
 	#TODO: Left off here. 
+COMMENT
 
 
 #Ganglia web setup -->
